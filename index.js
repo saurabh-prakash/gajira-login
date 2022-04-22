@@ -15,12 +15,10 @@ async function exec () {
   try {
     if (!process.env.JIRA_BASE_URL) throw new Error('Please specify JIRA_BASE_URL env')
     if (!process.env.JIRA_API_TOKEN) throw new Error('Please specify JIRA_API_TOKEN env')
-    if (!process.env.JIRA_USER_EMAIL) throw new Error('Please specify JIRA_USER_EMAIL env')
 
     const config = {
       baseUrl: process.env.JIRA_BASE_URL,
       token: process.env.JIRA_API_TOKEN,
-      email: process.env.JIRA_USER_EMAIL,
     }
 
     const result = await new Action({
@@ -44,7 +42,6 @@ async function exec () {
 
       fs.writeFileSync(cliConfigPath, YAML.stringify({
         endpoint: result.baseUrl,
-        login: result.email,
       }))
 
       fs.writeFileSync(cliCredentialsPath, `JIRA_API_TOKEN=${result.token}`)

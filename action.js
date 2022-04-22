@@ -5,7 +5,6 @@ module.exports = class {
     this.Jira = new Jira({
       baseUrl: config.baseUrl,
       token: config.token,
-      email: config.email,
     })
 
     this.config = config
@@ -16,7 +15,7 @@ module.exports = class {
   async execute () {
     const myself = await this.Jira.getMyself()
 
-    console.log(`Logged in as: ${myself.name}`)
+    console.log(`Logged in as user: ${myself.displayName}`)
 
     return this.config
   }
